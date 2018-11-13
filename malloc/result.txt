@@ -1,0 +1,17 @@
+➜  malloc git:(master) make build            
+make -C /lib/modules/`uname -r`/build M=/home/transang/linux/kernel-module/malloc modules
+make[1]: Entering directory '/usr/src/linux-headers-4.15.0-38-generic'
+  CC [M]  /home/transang/linux/kernel-module/malloc/malloc.o
+  Building modules, stage 2.
+  MODPOST 1 modules
+  CC      /home/transang/linux/kernel-module/malloc/malloc.mod.o
+  LD [M]  /home/transang/linux/kernel-module/malloc/malloc.ko
+make[1]: Leaving directory '/usr/src/linux-headers-4.15.0-38-generic'
+➜  malloc git:(master) ✗ make install
+sudo insmod malloc.ko
+[sudo] password for transang: 
+➜  malloc git:(master) ✗ make uninstall
+sudo rmmod malloc
+➜  malloc git:(master) ✗ dmesg
+[92059.330627] [KMALLOC_TEST]: could not allocate 8388608 bytes
+[92063.067997] [KMALLOC_TEST]: Exiting module.
