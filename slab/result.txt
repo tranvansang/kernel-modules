@@ -1,0 +1,15 @@
+make
+make -C /lib/modules/`uname -r`/build M=/home/transang/linux/kernel-module/slab modules
+make[1]: Entering directory '/usr/src/linux-headers-4.15.0-38-generic'
+  CC [M]  /home/transang/linux/kernel-module/slab/slab.o
+  Building modules, stage 2.
+  MODPOST 1 modules
+  CC      /home/transang/linux/kernel-module/slab/slab.mod.o
+  LD [M]  /home/transang/linux/kernel-module/slab/slab.ko
+make[1]: Leaving directory '/usr/src/linux-headers-4.15.0-38-generic'
+make install
+make uninstall
+make clean
+[92847.296746] [SLAB_TEST] Entering module.
+[92847.296756] [SLAB_TEST] ptr1 = {42, 42}; ptr2 = {42, 42}
+[92850.377796] [SLAB_TEST] Exiting module.
