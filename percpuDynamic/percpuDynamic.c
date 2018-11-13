@@ -12,7 +12,6 @@ struct task_struct *thread1, *thread2, *thread3;
 void *my_var2;
 
 static int thread_function(void *data){
-  printk(PRINT_PREF "thread started");
   while(!kthread_should_stop()){
     int *local_ptr, cpu;
     local_ptr = get_cpu_ptr(my_var2);
@@ -33,16 +32,13 @@ static int __init my_mod_init(void){
   my_var2 = alloc_percpu(int);
 
   if (!my_var2) return -1;
-  printk(PRINT_PREF "my_var2 = %p\n", my_var2);
-  for(cpu = 0; cpu < NR_CPUS; cpu++){
+  for(cpu = 0; cpu < nr_cpu_ids; cpu++){
     local_ptr = per_cpu_ptr(my_var2, cpu);
-    printk(PRINT_PREF "local_ptr at %d = %p\n", cpu, local_ptr);
     *local_ptr = 0;
     put_cpu();
   }
 
   wmb();
-  printk(PRINT_PREF "start thread");
 
   thread1 = kthread_run(thread_function, NULL, "percpu-thread1");
   thread2 = kthread_run(thread_function, NULL, "percpu-thread2");
