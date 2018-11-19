@@ -4,10 +4,6 @@
 #include <linux/gfp.h>
 #include <linux/delay.h>
 #include <linux/sched/task.h>
-/*#include <stdlib.h>*/
-/*#include <unistd.h>*/
-/*#include <sys/types.h>*/
-/*#include <sys/wait.h>*/
 
 #define PRINT_PREF "[PROCESS] "
 
@@ -19,14 +15,12 @@ static int __init my_mod_init(void){
   printk(PRINT_PREF "Entering module.\n");
 
   printk(PRINT_PREF "parent: start fork\n");
-  pid = _do_fork(
+  pid = do_fork(
       SIGCHLD,
       0,
       0,
       NULL,
-      NULL,
-      0
-      );
+      NULL);
 
   switch(pid)
   {
